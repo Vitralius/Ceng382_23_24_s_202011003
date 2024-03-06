@@ -2,16 +2,20 @@
 <html lang="tr">
 
     <head>
+        <meta character="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale-1.0">
         <title>Login</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../CSS/animation.css">
     </head>
 
     <body>
-        <form>
-            <label for="uname">Username:</label><br>
-            <input type="text" id="uname" name="uname"><br>
-            <label for="pasw">Password:</label><br>
-            <input type="text" id="passw" name="passw"><br><br>
-            <input type="submit" value="Login">
+        <form id="login-form" class="login-form" action="#" method="post">
+            <label class="form-items" for="uname">Username:</label><br>
+            <input class="form-items" type="text" id="uname" name="uname"><br>
+            <label class="form-items" for="pasw">Password:</label><br>
+            <input class="form-items" type="password" id="passw" name="passw"><br><br>
+            <input class="form-items" type="submit" value="Login">
         </form>
     </body>
 

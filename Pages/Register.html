@@ -2,21 +2,25 @@
 <html lang="tr">
 
     <head>
+        <meta character="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale-1.0">
         <title>Register</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../CSS/animation.css">
     </head>
 
     <body>
         <h1 style="font-size:50px;">User Registration</h1><br>
-        <form>
-            <label for="uname">Username:</label><br>
-            <input type="text" id="uname" name="uname"><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email"><br>
-            <label for="pasw">Password:</label><br>
-            <input type="text" id="passw" name="passw"><br>
-            <label for="pasw">Confirm Password:</label><br>
-            <input type="text" id="cpassw" name="cpassw"><br><br>
-            <input type="submit" value="Register">
+        <form id="register-form" class="register-form" action="#" method="post">
+            <label class="form-items" for="uname">Username:</label><br>
+            <input class="form-items" type="text" id="uname" name="uname"><br>
+            <label class="form-items" for="email">Email:</label><br>
+            <input class="form-items" type="text" id="email" name="email"><br>
+            <label class="form-items" for="pasw">Password:</label><br>
+            <input class="form-items" type="text" id="passw" name="passw"><br>
+            <label class="form-items" for="pasw">Confirm Password:</label><br>
+            <input class="form-items" type="text" id="cpassw" name="cpassw"><br><br>
+            <input class="form-items" type="submit" value="Register">
         </form>
     </body>
 

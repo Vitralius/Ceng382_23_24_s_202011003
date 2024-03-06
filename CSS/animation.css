@@ -1,0 +1,7 @@
+.login-form button:hover {
+    background-color: cyan;
+}
+
+.plantable tr:hover {
+    background-color: black;
+}
