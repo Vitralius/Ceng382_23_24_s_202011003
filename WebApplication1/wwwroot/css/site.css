@@ -12,6 +12,14 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+.btn-hide-passw{
+  margin-top: 8px;
+}
+
+.btn-hide-mail{
+  margin-top: 8px;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -25,11 +33,7 @@ body {
 html,
 body {
   height: 100%;
-}
-
-.header {
-  margin-top: 1px;
-  margin-bottom: 70%;
+  background-color:#f5f5f5;
 }
 
 .form-signin {
@@ -128,4 +132,14 @@ body {
 
 .bd-mode-toggle .dropdown-menu .active .bi {
   display: block !important;
+}
+
+header {
+  position: absolute; 
+  top: 5px;
+  width: auto;
+}
+
+footer {
+  background-color: rgb(255, 255, 255);
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj": {}
+    "C:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "c:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj": {
+    "C:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "C:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "c:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj",
+        "projectPath": "C:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\WebApplication1.csproj",
         "packagesPath": "C:\\Users\\doruk\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\obj\\",
+        "outputPath": "C:\\Users\\doruk\\Desktop\\Ceng382_Project\\temp\\Ceng382_23_24_s_202011003\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\doruk\\AppData\\Roaming\\NuGet\\NuGet.Config",
