@@ -1,27 +1,27 @@
 function myFunction1(event) {
-  event.preventDefault(); // Prevent form submission and page refresh
+  event.preventDefault();
   var password = document.getElementById("password-item");
   var btnhide = document.getElementById("btn-hide-1");
 
-  if (password.getAttribute("hidden") === null) {
-      password.setAttribute("hidden", "");
+  if (password.style.getPropertyValue("display") === "block") {
+      password.style.setProperty("display", "none");
       btnhide.innerHTML = "Show the Password TextBox";
   } else {
-      password.removeAttribute("hidden");
+      password.style.setProperty("display", "block");
       btnhide.innerHTML = "Hide the Password TextBox";
   }
 }
 
 function myFunction2(event) {
-  event.preventDefault(); // Prevent form submission and page refresh
+  event.preventDefault();
   var email = document.getElementById("email-item");
   var btnhide = document.getElementById("btn-hide-2");
 
-  if (email.getAttribute("hidden") === null) {
-      email.setAttribute("hidden", "");
+  if (email.style.getPropertyValue("display") === "block") {
+      email.style.setProperty("display", "none");
       btnhide.innerHTML = "Show the E-mail TextBox";
   } else {
-      email.removeAttribute("hidden");
+      email.style.setProperty("display", "block");
       btnhide.innerHTML = "Hide the E-mail TextBox";
   }
 }
