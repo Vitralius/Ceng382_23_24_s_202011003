@@ -1,0 +1,15 @@
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.exe
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.deps.json
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.runtimeconfig.json
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.dll
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.pdb
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.AssemblyInfoInputs.cache
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.AssemblyInfo.cs
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.csproj.CoreCompileInputs.cache
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.sourcelink.json
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.dll
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\refint\Ceng382_23_24_s_202011003.dll
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.pdb
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.genruntimeconfig.cache
+C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\ref\Ceng382_23_24_s_202011003.dll
