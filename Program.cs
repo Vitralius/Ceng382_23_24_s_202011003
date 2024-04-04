@@ -2,25 +2,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class RoomData
-{
-    [JsonPropertyName("Room")]
-    public Room[] Rooms {get; set;}
-}
-public class Room
-{
-    [JsonPropertyName("roomId")]
-    public string roomId {get; set;}
-    [JsonPropertyName("roomName")]
-    public string roomName {get; set;}
-    [JsonPropertyName("capacity")]
-    public int capacity {get; set;}
-
-}
-
 class Program
 {
-    static void main(String[]args)
+    static void Main(String[]args)
     {
         //define file path
         string filePath = "Data.json";
