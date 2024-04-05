@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 public class RoomData
 {
-    public const int ROOMSIZE = 20;
+    public const int ROOMSIZE = 10;
     [JsonPropertyName("Room")]
     public Room[] Rooms {get; set;} = new Room[ROOMSIZE];
 }
@@ -21,7 +21,7 @@ public class Room
     public Room()
     {
       roomId = "0";
-      roomName = "Null";
+      roomName = "null";
       capacity = 0;
     }
     

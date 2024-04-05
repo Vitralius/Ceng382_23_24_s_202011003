@@ -13,3 +13,18 @@ C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\
 C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.pdb
 C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.genruntimeconfig.cache
 C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\obj\Debug\net8.0\ref\Ceng382_23_24_s_202011003.dll
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.exe
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.deps.json
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.runtimeconfig.json
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.dll
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\bin\Debug\net8.0\Ceng382_23_24_s_202011003.pdb
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.AssemblyInfo.cs
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.sourcelink.json
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.dll
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\refint\Ceng382_23_24_s_202011003.dll
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.pdb
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\Ceng382_23_24_s_202011003.genruntimeconfig.cache
+C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\obj\Debug\net8.0\ref\Ceng382_23_24_s_202011003.dll

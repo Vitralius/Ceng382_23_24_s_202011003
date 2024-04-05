@@ -1,62 +1,60 @@
 using System;
+using System.Data;
+using System.Drawing;
 using System.Dynamic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 public class ReservationHandler
 {
-    private Reservation[,] reservations {get; set;}
+    private Reservation[][] reservations {get; set;}
     public void addReservation(Reservation reservation)
     {
-        int rows = reservations.GetLength(0);
-        int columns = reservations.GetLength(1);
-        for(int i=0; i<reservations.GetLength(0); i++)
+        int column = (int) (reservation.date.DayOfWeek);
+        int row = reservations.GetLength(0);
+        for(int i=0; i<row;i++)
         {
-                for(int j=0; j<reservations.GetLength(1); j++)
-                {
-                        reservations[rows, columns] = reservation;
-                }
+            if(reservations[i][column].reserverName == "null")
+            {
+                reservations[i][column] = reservation;
+            }
         }
     }
     public void deleteReservation (Reservation reservation)
     {
-        int rows = reservations.GetLength(0);
-        int columns = reservations.GetLength(1);
         for(int i=0; i<reservations.GetLength(0); i++)
         {
                 for(int j=0; j<reservations.GetLength(1); j++)
                 {
-                    if (reservations[i,j].room == reservations[i,j] && reservations.date == reservations[i,j] && reservations.reserverName == reservations[i,j])
-                        reservations[rows, columns] = reservation;
+                    if (reservations[j][i].reserverName == reservation.reserverName && reservations[j][i].room.roomId == reservation.room.roomId)
+                    {
+                        reservations[j][i] = new Reservation();
+                    }
                 }
         }        
     }
     public void displayWeeklySchedule()
     {
+        Console.WriteLine("Monday\t Tuesday\t Wednesday\t Thuersday\t Friday\t         Saturday\t Sunday", Color.Green);
         for(int i=0; i<reservations.GetLength(0); i++)
         {
-            for(int j=0; j<reservations.GetLength(1); j++)
+            for(int j=0; j<reservations[0].GetLength(0); j++)
             {
-                Console.WriteLine();
+                Console.Write(reservations[i][j].reserverName + "::" + reservations[i][j].room.roomId + "\t" + " ");
             }
+            Console.WriteLine();
         }
-    }
-    bool isReserved(Room R, DateTime D)
-    {
-        for(int i=0; i<reservations.GetLength(0); i++)
-        {
-            for(int j=0; j<reservations.GetLength(1); j++)
-            {
-                if(reservations[i,j].room == R && reservations[i,j].date.DayOfWeek == D.DayOfWeek)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
     public ReservationHandler()
     {
-      reservations = new Reservation[RoomData.ROOMSIZE,7];
+        reservations = new Reservation[10][];
+        for (int i = 0; i < 10; i++)
+        {
+            reservations[i] = new Reservation[7];
+            for (int j = 0; j < 7; j++)
+            {
+                reservations[i][j] = new Reservation();
+            }
+        }
     }
 }
