@@ -46,14 +46,17 @@ class Program
                 {
                     Console.WriteLine($"There must be less or equal to 5 room in Data.json file! Counter: {counter}");
                 }
-                Console.WriteLine("OLD: ");
-                Handler.displayWeeklySchedule();
+                Console.WriteLine("Initial Schedule: ");
+                Handler.displayWeeklySchedule(roomData);
                 for(int i=0; i<5; i++)
                 {
                     Handler.addReservation(reservations[i]);
                 }
-                Console.WriteLine("NEW:");
-                Handler.displayWeeklySchedule();
+                Console.WriteLine("Before delete Schedule:");
+                Handler.displayWeeklySchedule(roomData);
+                Handler.deleteReservation(reservations[0]);
+                Console.WriteLine("Final Schedule:");
+                Handler.displayWeeklySchedule(roomData);
             }
             else
             {
