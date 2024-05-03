@@ -1,18 +1,30 @@
 using System;
 using System.Dynamic;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class ReservationRepository
+public class ReservationRepository : IReservationRepository
 {
     private List<Reservation> reservations;
     private List<Room> rooms;
-    ReservationRepository()
+    public ReservationRepository()
     {
         reservations = new List<Reservation>();
         rooms = new List<Room>();
+        LoadRooms();
+        LoadReservations();
     }
-    void loadReservations()
+    public List<Reservation> getReservations()
+    {
+        return reservations;
+    }
+    public List<Room> getRooms()
+    {
+        return rooms;
+    }
+
+    public void LoadReservations()
     {
         string filePath = "ReservationData.json";
         List<Reservation> R = new List<Reservation>();
@@ -36,6 +48,7 @@ public class ReservationRepository
             {
                 Console.WriteLine("reservationData is empty!");
             }
+            this.reservations = R;
 
         }
         catch (Exception e)
@@ -43,24 +56,30 @@ public class ReservationRepository
             Console.WriteLine($"An unexpected error occurred: {e.Message}");
         }  
     }
-    void loadRooms()
+    public void LoadRooms()
     {
         this.rooms= RoomHandler.GetRooms();
     }
-    void saveReservations()
+    public void SaveReservations()
     {
         string json = JsonSerializer.Serialize(reservations);
         File.WriteAllText(@"C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\ReservationData.json", json);
     }
-    void saveRooms()
+    public void SaveRooms()
     {
         RoomHandler.SaveRooms(rooms);
+    }
+    public void AddReservation(Reservation reservation)
+    {
+        reservations.Add(reservation);
+    }
+    public void DeleteReservation(Reservation reservation)
+    {
+        reservations.Remove(reservation);
     }
 }
 interface IReservationRepository
 {
-    List<Reservation> getReservations();
-    List<Room> getRooms();
-    void addReservation(Reservation reservation);
-    void deleteReservation(Reservation reservation);
+    public void AddReservation(Reservation reservation);
+    public void DeleteReservation(Reservation reservation);
 }

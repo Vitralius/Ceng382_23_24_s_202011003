@@ -6,6 +6,17 @@ using System.Text.Json.Serialization;
 
 public static class RoomHandler 
 {
+    public static Room findRoom(string roomName, List<Room> rooms)
+    {
+        for(int i = 0; i < rooms.Count; i++)
+        {
+            if(rooms[i].roomName== roomName)
+            {
+                return rooms[i] ?? new Room();
+            }
+        }
+        return new Room();
+    }
     public static List<Room> GetRooms() 
     {   
         string filePath = "RoomData.json";
@@ -44,9 +55,9 @@ public static class RoomHandler
         string json = JsonSerializer.Serialize(R);
         File.WriteAllText(@"C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\ReservationData.json", json);
     }
-    public static void ListAvailableRooms()
+    public static void ListAvailableRooms(DateTime DT)
     {
-
+        
     }
 
 }

@@ -11,8 +11,6 @@ public class ReservationData
 }
 public class Reservation
 {
-    [JsonPropertyName("time")]
-    public DateTime time {get; set;}
     [JsonPropertyName("date")]
     public DateTime date {get; set;}
     [JsonPropertyName("reserverName")]
@@ -21,14 +19,12 @@ public class Reservation
     public Room room {get; set;}
     public Reservation()
     {
-      time = DateTime.Now;
       date = DateTime.Now;
       reserverName = "null";
       room = new Room();
     }
-    public Reservation(DateTime T, DateTime D, String RN, Room R)
+    public Reservation(DateTime D, String RN, Room R)
     {
-      time = T;
       date = D;
       reserverName = RN;
       room = R;
