@@ -3,18 +3,18 @@ using System.Dynamic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class ReservationData
-{
-    public const int RESERVATIONSIZE = 10;
+public class ReservationData{
     [JsonPropertyName("Reservation")]
-    public Reservation[] reservations {get; set;} = new Reservation[RESERVATIONSIZE];
+    public List<Reservation> reservations { get; set; }
+    public ReservationData(List<Reservation> R) { reservations = R; }
+    public ReservationData() { reservations = new List<Reservation>();}
 }
 public class Reservation
 {
     [JsonPropertyName("date")]
     public DateTime date {get; set;}
     [JsonPropertyName("reserverName")]
-    public String reserverName {get; set;}
+    public string reserverName {get; set;}
     [JsonPropertyName("room")]
     public Room room {get; set;}
     public Reservation()
@@ -28,6 +28,13 @@ public class Reservation
       date = D;
       reserverName = RN;
       room = R;
+    }
+
+    public Reservation(Reservation R)
+    {
+      this.date = R.date;
+      this.reserverName = R.reserverName;
+      this.room = R.room;
     }
 
 }

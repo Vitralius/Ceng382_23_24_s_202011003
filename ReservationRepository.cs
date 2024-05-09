@@ -3,17 +3,18 @@ using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Globalization;
 
 public class ReservationRepository : IReservationRepository
 {
-    private List<Reservation> reservations;
-    private List<Room> rooms;
+    public List<Reservation> reservations;
+    public List<Room> rooms;
     public ReservationRepository()
     {
         reservations = new List<Reservation>();
         rooms = new List<Room>();
-        LoadRooms();
         LoadReservations();
+        LoadRooms();
     }
     public List<Reservation> getReservations()
     {
@@ -27,7 +28,6 @@ public class ReservationRepository : IReservationRepository
     public void LoadReservations()
     {
         string filePath = "ReservationData.json";
-        List<Reservation> R = new List<Reservation>();
         try //tries to catch errors from file to string phase
         {
             string jsonString = File.ReadAllText(filePath);
@@ -39,31 +39,36 @@ public class ReservationRepository : IReservationRepository
 
             if(reservationData?.reservations != null)
             {
-                for(int i = 0; i < reservationData.reservations.Length; i++)
+                for(int i = 0; i < reservationData.reservations.Count; i++)
                 {
-                    R[i] = reservationData.reservations[i];
+                    reservations.Add(reservationData.reservations[i]);
                 }
             }
             else
             {
                 Console.WriteLine("reservationData is empty!");
             }
-            this.reservations = R;
-
         }
         catch (Exception e)
         {
-            Console.WriteLine($"An unexpected error occurred: {e.Message}");
+            Console.WriteLine($"An unexpected error occurred at LoadReservations(): {e.Message}");
         }  
     }
     public void LoadRooms()
     {
-        this.rooms= RoomHandler.GetRooms();
+        rooms= RoomHandler.GetRooms();
     }
     public void SaveReservations()
     {
-        string json = JsonSerializer.Serialize(reservations);
-        File.WriteAllText(@"C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\ReservationData.json", json);
+        var reservationData = new ReservationData(reservations);
+        string jsonString = JsonSerializer.Serialize(reservationData, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+        });
+        File.WriteAllText("ReservationData.json", jsonString);
+        Console.WriteLine("Reservations saved successfully.");
     }
     public void SaveRooms()
     {
@@ -71,11 +76,38 @@ public class ReservationRepository : IReservationRepository
     }
     public void AddReservation(Reservation reservation)
     {
-        reservations.Add(reservation);
+        if(!isreserved(reservation))
+        {
+            reservations.Add(reservation);
+        }
+        else
+        {
+            Console.WriteLine("Given values are already reserved pls take another reservartion.");
+        }
+        
     }
     public void DeleteReservation(Reservation reservation)
     {
-        reservations.Remove(reservation);
+        for(int i=0; i<reservations.Count; i++)
+        {
+            if(reservation.reserverName==reservations[i].reserverName && reservations[i].date.ToShortDateString() == reservation.date.ToShortDateString() && reservation.room.roomName==reservations[i].room.roomName)
+            {
+                reservations.RemoveAt(i);
+                Console.WriteLine("Reservation deleted!");
+                break;
+            }
+        }
+    }
+    public bool isreserved(Reservation R)
+    {
+        for(int i=0; i<reservations.Count;i++)
+        {
+            if(R.date.ToShortDateString()==reservations[i].date.ToShortDateString() && R.room.roomName==reservations[i].room.roomName)
+            {
+                return true;
+            }   
+        }
+        return false;
     }
 }
 interface IReservationRepository

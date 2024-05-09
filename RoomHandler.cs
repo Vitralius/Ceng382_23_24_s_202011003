@@ -3,19 +3,22 @@ using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Globalization;
 
 public static class RoomHandler 
 {
     public static Room findRoom(string roomName, List<Room> rooms)
-    {
-        for(int i = 0; i < rooms.Count; i++)
+    { 
+      Room found = new Room ();      
+      for(int i = 0; i < rooms.Count; i++)
         {
             if(rooms[i].roomName== roomName)
             {
-                return rooms[i] ?? new Room();
+               found = rooms[i];
+               break;
             }
         }
-        return new Room();
+        return found;
     }
     public static List<Room> GetRooms() 
     {   
@@ -30,11 +33,12 @@ public static class RoomHandler
             });
             
 
-            if(roomData?.Rooms != null)
+            if(roomData?.rooms != null)
             {
-                for(int i = 0; i < roomData.Rooms.Length; i++)
+                
+                for(int i = 0; i < roomData.rooms.Count; i++)
                 {
-                    R[i] = roomData.Rooms[i];
+                    R.Add(roomData.rooms[i]);
                 }
             }
             else
@@ -46,18 +50,25 @@ public static class RoomHandler
         }
         catch (Exception e)
         {
-            Console.WriteLine($"An unexpected error occurred: {e.Message}");
+            Console.WriteLine($"An unexpected error occurred at GetRooms(): {e.Message}");
             return R;
         }     
     }
     public static void SaveRooms(List<Room> R)
     {
-        string json = JsonSerializer.Serialize(R);
-        File.WriteAllText(@"C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\ReservationData.json", json);
+        var roomData = new RoomData(R);
+        string jsonString = JsonSerializer.Serialize(roomData, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+        });
+        File.WriteAllText("RoomData.json", jsonString);
+        Console.WriteLine("Rooms saved successfully.");
     }
     public static void ListAvailableRooms(DateTime DT)
     {
-        
+        //This will held soon.
     }
 
 }
