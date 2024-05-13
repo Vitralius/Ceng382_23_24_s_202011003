@@ -6,18 +6,18 @@ using System.Text.Json.Serialization;
 public class LogRecordData
 {
     [JsonPropertyName("Log")]
-    public List<LogRecord> logs { get; set; }
-    public LogRecordData(List<LogRecord> LR) { logs = LR; }
-    public LogRecordData() { logs = new List<LogRecord>();}
+    public List<LogRecord>? logs { get; set; }
+    // public LogRecordData(List<LogRecord> LR) { logs = LR; }
+    // public LogRecordData() { logs = new List<LogRecord>();}
 }
 public class LogRecord
 {
  [JsonPropertyName("reserver")]
- public string reservername;
+ public string reservername {get; set;}
  [JsonPropertyName("roomName")]
- public string roomname;
+ public string roomname {get; set;}
  [JsonPropertyName("timesTamp")]
- public DateTime timestamp;
+ public DateTime timestamp {get; set;}
  public LogRecord()
  {
   reservername="Null";

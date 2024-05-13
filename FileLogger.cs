@@ -24,7 +24,7 @@ public class FileLogger : ILogger
     }
     public void updatelog()
     {
-        var logData = new LogRecordData(logs);
+        var logData = new LogRecordData { logs = logs };
         try
         {
             string jsonString = JsonSerializer.Serialize(logData, new JsonSerializerOptions
