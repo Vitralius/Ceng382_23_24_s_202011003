@@ -8,7 +8,9 @@ public class RoomData
 {
     public const int ROOMSIZE = 10;
     [JsonPropertyName("Room")]
-    public Room[] Rooms {get; set;} = new Room[ROOMSIZE];
+    public List<Room> rooms { get; set; }
+    public RoomData(List<Room> R) { rooms = R; }
+    public RoomData() { rooms = new List<Room>();}
 }
 public class Room
 {

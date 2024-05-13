@@ -5,18 +5,19 @@ using System.Text.Json.Serialization;
 
 public class LogRecordData
 {
-    public const int LOGRECORDSIZE = 100;
     [JsonPropertyName("Log")]
-    public LogRecord[] logs {get; set;} = new LogRecord[LOGRECORDSIZE];
+    public List<LogRecord> logs { get; set; }
+    public LogRecordData(List<LogRecord> LR) { logs = LR; }
+    public LogRecordData() { logs = new List<LogRecord>();}
 }
 public class LogRecord
 {
- [JsonPropertyName("reserverName")]
- private string reservername;
+ [JsonPropertyName("reserver")]
+ public string reservername;
  [JsonPropertyName("roomName")]
- private string roomname;
+ public string roomname;
  [JsonPropertyName("timesTamp")]
- private DateTime timestamp;
+ public DateTime timestamp;
  public LogRecord()
  {
   reservername="Null";
@@ -28,5 +29,11 @@ public class LogRecord
   reservername=RSN;
   roomname=RON;
   timestamp=DT;
+ }
+ public LogRecord(LogRecord LR)
+ {
+  this.reservername=LR.reservername;
+  this.roomname=LR.roomname;
+  this.timestamp=LR.timestamp;
  }
 }

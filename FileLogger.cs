@@ -1,30 +1,51 @@
 using System;
 using System.Dynamic;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Globalization;
 
 public class FileLogger : ILogger
 {
-    private List<LogRecord> logs;
+    public List<LogRecord> logs;
     public FileLogger()
     {
         logs = new List<LogRecord>();
-    }
-    public void NewLog(string reserverName, string roomName, DateTime dateTime)
-    {
-        LogRecord newLog = new LogRecord(reserverName, roomName, dateTime);
-        logs.Add(newLog);
+        Log();
     }
     public void NewLog(LogRecord Log)
     {
         logs.Add(Log);
     }
-    public void Log(LogRecord log)
+
+    public List<LogRecord> getLogs()
+    {
+        return logs;
+    }
+    public void updatelog()
+    {
+        var logData = new LogRecordData(logs);
+        try
+        {
+            string jsonString = JsonSerializer.Serialize(logData, new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+            });
+            File.WriteAllText("LogData.json", jsonString);
+            Console.WriteLine("Logs saved successfully.");
+        }
+
+        catch (Exception e)
+        {
+            Console.WriteLine($"An unexpected error occurred at updateLog(): {e.Message}");
+        }
+
+    }
+    public void Log()
     {
         string filePath = "LogData.json";
-        List<LogRecord> LR = new List<LogRecord>();
-        string jsonData = System.IO.File.ReadAllText(filePath);
-
         try //tries to catch errors from file to string phase
         {
             string jsonString = File.ReadAllText(filePath);
@@ -36,28 +57,23 @@ public class FileLogger : ILogger
 
             if(logrecordData?.logs != null)
             {
-                for(int i = 0; i < logrecordData.logs.Length; i++)
+                for(int i = 0; i < logrecordData.logs.Count; i++)
                 {
-                    LR[i] = logrecordData.logs[i];
+                    logs.Add(logrecordData.logs[i]);
                 }
             }
             else
             {
                 Console.WriteLine("logrecordData is empty!");
             }
-
-            LR.Add(log);
-            jsonData = JsonSerializer.Serialize(LR);
-            System.IO.File.WriteAllText(filePath, jsonData);
-
         }
         catch (Exception e)
         {
-            Console.WriteLine($"An unexpected error occurred: {e.Message}");
+            Console.WriteLine($"An unexpected error occurred at Log(): {e.Message}");
         }  
     }
 }
 interface ILogger
 {
-    public void Log(LogRecord Log);
+    public void Log();
 }
