@@ -26,21 +26,5 @@ namespace WebApp.Pages;
              AppDb.SaveChanges();
              return RedirectToAction("Get");
          }
-
-            public IActionResult OnPostDelete(int id)
-        {
-            if (AppDb.Rooms != null)
-            {
-                var room = AppDb.Rooms.Find(id);
-                if (room != null)
-                {
-                    AppDb.Rooms.Remove(room);
-                    AppDb.SaveChanges();
-                }
-         }
-
-         return RedirectToAction("Get");
-     }
-
     }
 
