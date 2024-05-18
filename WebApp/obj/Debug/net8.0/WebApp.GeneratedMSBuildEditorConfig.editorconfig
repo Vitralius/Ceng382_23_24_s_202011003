@@ -54,12 +54,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/AddRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/ListRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdFJvb21zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Privacy.cshtml]
