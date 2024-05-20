@@ -1,0 +1,31 @@
+@page
+@model ListReservationsModel
+@{
+    ViewData["Title"] = "List Reservation";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to list Reservation.</p>
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Reserver Name</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var Reservation in Model.reservationList)
+    {
+        <tr>
+            <td>@Reservation.ReserverName</td>
+            <td>@Reservation.Date</td>
+            <td>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Reservation.ReservationId">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
