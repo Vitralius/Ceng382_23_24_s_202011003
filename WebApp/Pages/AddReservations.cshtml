@@ -2,6 +2,10 @@
 @model AddReservationsModel
 @{
     ViewData["Title"] = "Add Reservations";
+    var today = DateTime.Today;
+    var lastday = today.AddDays(7);
+    var todayString = today.ToString("yyyy-MM-dd");
+    var lastdayString = lastday.ToString("yyyy-MM-dd");
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -10,24 +14,19 @@
 <form method="post">
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="form-group">
-    <label asp-for="Reservation.ReserverName" class="control-label"></label>
-    <input asp-for="Reservation.ReserverName" class="form-control" />
-    <span asp-validation-for="Reservation.ReserverName" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Reservation.Room" class="control-label"></label>
-    <select asp-for="Reservation.Room" class="form-control" id="PizzaSize">
+    <label asp-for="Reservation.RoomId" class="control-label"></label>
+    <select asp-for="Reservation.RoomId" class="form-control" id="PizzaSize">
         <option value="">-- Select Room --</option>
-        @foreach (Room room in Model.roomList)
+        @foreach (var room in Model.roomList)
         {
-            <option value="@room.RoomName">@room.RoomName</option>
+            <option value="@room.RoomId">@room.RoomName</option>
         }
     </select>
-    <span asp-validation-for="Reservation.Room" class="text-danger"></span>
+    <span asp-validation-for="Reservation.RoomId" class="text-danger"></span>
 </div>
 <div class="form-group">
     <label asp-for="Reservation.Date" class="control-label"></label>
-<input class="form-control" asp-for="Reservation.Date" />
+<input class="form-control" asp-for="Reservation.Date" type="date" min="@todayString" max="@lastdayString"/>
 </div>
 <div class="form-group">
     <input type="submit" value="Create" class="btn btn-primary" />

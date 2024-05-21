@@ -1,16 +1,17 @@
 @page
+@using Microsoft.AspNetCore.Http
 @model ListReservationsModel
 @{
     ViewData["Title"] = "List Reservation";
 }
 <h1>@ViewData["Title"]</h1>
-
 <p>Use this page to list Reservation.</p>
 
 <table class="table mt-5">
     <thead>
         <tr>
-            <th scope="col">Reserver Name</th>
+            <th scope="col">Room Name</th>
+            <th scope="col">Room Capacity</th>
             <th scope="col">Date</th>
         </tr>
     </thead>
@@ -18,13 +19,20 @@
     @foreach (var Reservation in Model.reservationList)
     {
         <tr>
-            <td>@Reservation.ReserverName</td>
-            <td>@Reservation.Date</td>
+            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).RoomName</td>
+            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).Capacity</td>
+            <td>@Reservation.Date.ToShortDateString()</td>
+            @if (@Reservation.ReserverId==Model.UserId)
+            {
             <td>
                 <form method="post" asp-page-handler="Delete" asp-route-id="@Reservation.ReservationId">
+                @if(Model.UserId == @Reservation.ReserverId)
+                {
                     <button class="btn btn-danger">Delete</button>
+                }
                 </form>
             </td>
+            }
         </tr>
     }
     </tbody>

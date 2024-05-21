@@ -21,8 +21,11 @@
             <td>@Room.RoomName</td>
             <td>@Room.Capacity</td>
             <td>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@Room.Id">
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Room.RoomId">
+                    @if(Model.UserId == @Room.OwnerId)
+                    {
                     <button class="btn btn-danger">Delete</button>
+                    }
                 </form>
             </td>
         </tr>

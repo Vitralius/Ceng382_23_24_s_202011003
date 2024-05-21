@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Data;
 
@@ -11,9 +12,11 @@ using WebApp.Data;
 namespace WebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240521131715_ReservationsAndRooms2")]
+    partial class ReservationsAndRooms2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,12 +242,12 @@ namespace WebApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("roomId")
                         .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("roomId");
 
                     b.ToTable("Reservations");
                 });
@@ -328,7 +331,7 @@ namespace WebApp.Data.Migrations
                 {
                     b.HasOne("WebApp.Models.Room", "Room")
                         .WithMany("Reservations")
-                        .HasForeignKey("RoomId")
+                        .HasForeignKey("roomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

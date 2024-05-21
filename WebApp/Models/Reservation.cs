@@ -1,14 +1,17 @@
-public class Reservation
+﻿using System;
+using System.Collections.Generic;
+
+namespace WebApp.Models;
+
+public partial class Reservation
 {
-    public int ReservationId { get; set;}
-    public DateTime Date {get; set;}
-    public string ReserverName {get; set;}
-    public Room Room {get; set;}
-    public Reservation()
-    {
-      ReservationId = -1;
-      Date = DateTime.Now;
-      ReserverName = "null";
-      Room = new Room();
-    }
+    public int ReservationId { get; set; }
+
+    public DateTime Date { get; set; }
+
+    public string ReserverId { get; set; } = null!;
+
+    public int RoomId { get; set; }
+    
+    public virtual Room Room { get; set; } = null!;
 }
