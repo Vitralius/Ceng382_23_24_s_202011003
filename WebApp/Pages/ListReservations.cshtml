@@ -3,16 +3,60 @@
 @model ListReservationsModel
 @{
     ViewData["Title"] = "List Reservation";
+    var today = DateTime.Today;
+    var lastday = today.AddDays(7);
+    var todayString = today.ToString("yyyy-MM-dd");
+    var lastdayString = lastday.ToString("yyyy-MM-dd");
 }
 <h1>@ViewData["Title"]</h1>
 <p>Use this page to list Reservation.</p>
 
+<form asp-page="./ListReservations" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Room Name:
+            <input type="text" name="searchString1" value="" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./ListReservations">Back to full List</a>
+        </p>
+    </div>
+    <div class="form-actions no-color">
+        <p>
+            Find by Capacity:  
+            <input type="text" name="searchString2" value="" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./ListReservations">Back to full List</a>
+        </p>
+    </div>
+    <div class="form-actions no-color">
+        <p>
+            Find by Date:
+            <input type="date" name="searchString3" value="" min="@todayString" max="@lastdayString"/>
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            
+            <a asp-page="./ListReservations">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table mt-5">
     <thead>
         <tr>
-            <th scope="col">Room Name</th>
-            <th scope="col">Room Capacity</th>
-            <th scope="col">Date</th>
+            <th scope="col">
+                <a asp-page="./ListReservations" asp-route-sortOrder="@Model.RoomNameSort">
+                    @Html.DisplayNameFor(model => model.reservationList[0].Room.RoomName)
+                </a>
+            </th>
+            <th scope="col">
+                <a asp-page="./ListReservations" asp-route-sortOrder="@Model.RoomCapacitySort">
+                    @Html.DisplayNameFor(model => model.reservationList[0].Room.Capacity)
+                </a>
+            </th>
+            <th scope="col">
+                <a asp-page="./ListReservations" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.reservationList[0].Date)
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>

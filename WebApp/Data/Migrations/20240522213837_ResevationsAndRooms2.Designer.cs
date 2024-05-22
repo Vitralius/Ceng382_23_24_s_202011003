@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521131715_ReservationsAndRooms2")]
-    partial class ReservationsAndRooms2
+    [Migration("20240522213837_ResevationsAndRooms2")]
+    partial class ResevationsAndRooms2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,19 +235,19 @@ namespace WebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("ReserverId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("roomId")
+                    b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("roomId");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Reservations");
                 });
@@ -331,7 +331,7 @@ namespace WebApp.Data.Migrations
                 {
                     b.HasOne("WebApp.Models.Room", "Room")
                         .WithMany("Reservations")
-                        .HasForeignKey("roomId")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -7,7 +7,7 @@ public partial class Reservation
 {
     public int ReservationId { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
 
     public string ReserverId { get; set; } = null!;
 

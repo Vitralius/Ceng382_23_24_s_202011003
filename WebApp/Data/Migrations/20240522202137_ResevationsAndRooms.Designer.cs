@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521135157_ReservationsAndRooms5")]
-    partial class ReservationsAndRooms5
+    [Migration("20240522202137_ResevationsAndRooms")]
+    partial class ResevationsAndRooms
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
