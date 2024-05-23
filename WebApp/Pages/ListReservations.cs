@@ -89,7 +89,7 @@ namespace WebApp.Pages;
                     sortingList = sortingList.OrderBy(s => s.Room.RoomName);
                     break;
             }
-            reservationList = sortingList.ToList();  
+            reservationList = sortingList.ToList();
         }
         public IActionResult OnPostDelete(int id)
         {
@@ -106,6 +106,20 @@ namespace WebApp.Pages;
                 }
          }
          
+
+         return RedirectToAction("Get");
+     }
+        public IActionResult OnPostEdit(Reservation updatedReservation)
+        {
+            var reservation = AppDb.Reservations.FirstOrDefault(p => p.ReservationId == updatedReservation.ReservationId);
+            if (reservation != null)
+            {
+                reservation.ReservationId = updatedReservation.ReservationId;
+                reservation.ReserverId = updatedReservation.ReserverId;
+                reservation.RoomId = updatedReservation.RoomId;
+                reservation.Room = updatedReservation.Room;
+            }
+            AppDb.SaveChanges();
 
          return RedirectToAction("Get");
      }

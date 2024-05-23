@@ -16,7 +16,7 @@ public class ApplicationDbContext : IdentityDbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = WebApplication.CreateBuilder();
-        var connectionString = builder.Configuration.GetConnectionString ("DefaultConnection");
+        var connectionString = builder.Configuration.GetConnectionString ("WebAppConnection");
         optionsBuilder.UseSqlServer(connectionString);
     }
     public DbSet<Room> Rooms { get; set; }

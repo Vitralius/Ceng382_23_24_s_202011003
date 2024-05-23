@@ -17,87 +17,83 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApp
 build_property.RootNamespace = WebApp
-build_property.ProjectDir = C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\WebApp\
+build_property.ProjectDir = C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\WebApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\user\Desktop\Lecture Stuff\Ceng_382_Lab\Ceng382_23_24_s_202011003\WebApp
+build_property.MSBuildProjectDirectory = C:\Users\doruk\Desktop\Ceng382_Project\temp\Ceng382_23_24_s_202011003\WebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Logout.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/AddReservations.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/AddReservations.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkUmVzZXJ2YXRpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/AddRooms.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/AddRooms.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkUm9vbXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Error.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Index.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/ListReservations.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/ListReservations.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdFJlc2VydmF0aW9ucy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/ListRooms.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/ListRooms.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdFJvb21zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_LoginPartial.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/_ViewImports.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/_ViewStart.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/user/Desktop/Lecture Stuff/Ceng_382_Lab/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_Layout.cshtml]
+[C:/Users/doruk/Desktop/Ceng382_Project/temp/Ceng382_23_24_s_202011003/WebApp/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-1lnhnt7yf2

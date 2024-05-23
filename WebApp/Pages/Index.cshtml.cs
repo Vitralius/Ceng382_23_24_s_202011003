@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.AspNetCore.Identity;
 namespace WebApp.Pages;
 
+
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
@@ -18,4 +19,5 @@ public class IndexModel : PageModel
     {
 
     }
+
 }
