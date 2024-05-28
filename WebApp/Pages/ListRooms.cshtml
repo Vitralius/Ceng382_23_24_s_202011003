@@ -6,27 +6,73 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to list rooms.</p>
+<form asp-page="./ListRooms" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Status:  
+            <select name="searchString" id="PizzaSize">
+                <option value="">--Select Status</option>
+                <option value="false">Available</option>
+                <option value="true">Full</option>
+            </select> 
+            <input type="submit" value="Search" class="btn btn-primary" />|
+            <a asp-page="./ListRooms">Back to full List</a>
+        </p>
+    </div>
+</form>
 
 <table class="table mt-5">
     <thead>
         <tr>
             <th scope="col">RoomName</th>
             <th scope="col">Capacity</th>
+            <th scope="col">Status</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var Room in Model.roomList)
+    @foreach (var Room in Model.RoomList)
     {
         <tr>
             <td>@Room.RoomName</td>
             <td>@Room.Capacity</td>
             <td>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@Room.RoomId">
-                    @if(Model.UserId == @Room.OwnerId)
-                    {
-                    <button class="btn btn-danger">Delete</button>
-                    }
-                </form>
+                @if(Room.OwnerId == Model.UserId && Room.IsReservable == true)
+                {
+                    <form method="post" asp-page-handler="Close" asp-route-id="@Room.RoomId">
+                    <button class="btn btn-danger"><i class="fa-solid fa-lock" title="Close"></i></button>
+                    </form>
+                }
+                else if (Room.OwnerId == Model.UserId && Room.IsReservable == false)
+                {
+                    <form method="post" asp-page-handler="Open" asp-route-id="@Room.RoomId">
+                    <button class="btn btn-primary"><i class="fa-solid fa-lock-open" title="Open"></i></button>
+                    </form>
+                }
+                else if (Room.IsReservable == false)
+                {
+                    <text>Room Closed</text>
+                }
+                else if (Room.Capacity == 0)
+                {
+                    <text>Room is Full</text>
+                }
+                else
+                {
+                    <text>Room is Reservable</text>
+                }
+            </td>
+            <td>
+                @if(Room.OwnerId == Model.UserId)
+                {
+                    <form method="post" asp-page-handler="Cancel" asp-route-id="@Room.RoomId">
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+                    </form>
+                }
+                else
+                {
+                    <i class="fa-solid fa-ghost"></i>
+                }
             </td>
         </tr>
     }

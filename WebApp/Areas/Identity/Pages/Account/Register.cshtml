@@ -38,10 +38,22 @@
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
-
+                        <p>
+                            Steps for changing User Name:
+                            <br>
+                            1. Register to the system with an E-Mail address
+                            <br>
+                            2. Confirm your E-Mail address through opened tab
+                            <br>
+                            3. Login with registered E-Mail address
+                            <br>
+                            4. Click on Welcome "User"
+                            <br>
+                            5. Change your User Name from Profile options.
+                        </p>
                     </div>
                 }
-                else
+                @* else
                 {
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
@@ -53,7 +65,7 @@
                             </p>
                         </div>
                     </form>
-                }
+                } *@
             }
         </section>
     </div>

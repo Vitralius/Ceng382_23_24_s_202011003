@@ -1,0 +1,53 @@
+@page
+@model MyReservationsModel
+@{
+    ViewData["Title"] = "My Reservations";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h2>My Reservations</h2>
+
+ <table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Room Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Cancel</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var reservation in Model.ReservationList)
+    {
+            <tr>
+                <td>@Model.AppDb.Rooms.FirstOrDefault(r=>r.RoomId == reservation.RoomId).RoomName</td>
+                @* <td>@reservation.Room.RoomName</td> *@
+                <td>@reservation.Date</td>
+                <td>
+                @if(reservation.IsDeleted==false)
+                {
+                    <form method="post" asp-page-handler="Cancel" asp-route-id="@reservation.ReservationId">
+                    <button class="btn btn-danger"><i class="fa-solid fa-star" title="Cancel"></i></button>
+                    </form>
+                }
+                else
+                {
+                    <text>Reservation Canceled</text>
+                }
+                </td>
+                <td>
+                @if(reservation.IsCanceled==false)
+                {
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@reservation.ReservationId">
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+                    </form>
+                }
+                else
+                {
+                    <text>Must Cancel First</text>
+                }
+                </td>
+            </tr>
+    }
+    </tbody>
+</table> 

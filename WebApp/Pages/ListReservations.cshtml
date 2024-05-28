@@ -4,9 +4,18 @@
 @{
     ViewData["Title"] = "List Reservation";
     var today = DateTime.Today;
-    var lastday = today.AddDays(7);
+    var lastday = today.AddDays(7-(int)today.DayOfWeek);
     var todayString = today.ToString("yyyy-MM-dd");
     var lastdayString = lastday.ToString("yyyy-MM-dd");
+}
+@section scripts{
+   <script>
+        $(function () {
+            $('button.btn-mymodal').on('click', function () {
+                $('#myModal').trigger('focus');
+            });
+        });
+    </script>
 }
 <h1>@ViewData["Title"]</h1>
 <p>Use this page to list Reservation.</p>
@@ -37,6 +46,18 @@
             <a asp-page="./ListReservations">Back to full List</a>
         </p>
     </div>
+    <div class="form-actions no-color">
+        <p>
+            Find by Status:  
+            <select name="searchString4" id="PizzaSize">
+                <option value="">--Select Status</option>
+                <option value="True">Confirmed</option>
+                <option value="False">Waiting</option>
+            </select> 
+            <input type="submit" value="Search" class="btn btn-primary" />|
+            <a asp-page="./ListReservations">Back to full List</a>
+        </p>
+    </div>
 </form>
 
 <table class="table mt-5">
@@ -44,46 +65,117 @@
         <tr>
             <th scope="col">
                 <a asp-page="./ListReservations" asp-route-sortOrder="@Model.RoomNameSort">
-                    @Html.DisplayNameFor(model => model.reservationList[0].Room.RoomName)
+                    @Html.DisplayNameFor(model => model.ReservationList[0].Room.RoomName)
                 </a>
             </th>
             <th scope="col">
                 <a asp-page="./ListReservations" asp-route-sortOrder="@Model.RoomCapacitySort">
-                    @Html.DisplayNameFor(model => model.reservationList[0].Room.Capacity)
+                    @Html.DisplayNameFor(model => model.ReservationList[0].Room.Capacity)
                 </a>
             </th>
             <th scope="col">
                 <a asp-page="./ListReservations" asp-route-sortOrder="@Model.DateSort">
-                    @Html.DisplayNameFor(model => model.reservationList[0].Date)
+                    @Html.DisplayNameFor(model => model.ReservationList[0].Date)
                 </a>
             </th>
+            <th scope="col">
+                <a asp-page="./ListReservations" asp-route-sortOrder="@Model.IsConfirmedSort">
+                Status
+                </a>
+            </th>
+            <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var Reservation in Model.reservationList)
+    @foreach (var Reservation in Model.ReservationList)
     {
         <tr>
-            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).RoomName</td>
-            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).Capacity</td>
+            <td>@Reservation.Room.RoomName</td>
+            <td>@Reservation.Room.Capacity</td>
+            @* <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).RoomName</td>
+            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).Capacity</td> *@
             <td>@Reservation.Date.ToShortDateString()</td>
-            @if (@Reservation.ReserverId==Model.UserId)
-            {
             <td>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@Reservation.ReservationId">
-                @if(Model.UserId == @Reservation.ReserverId)
+                
+                @if(Model.UserId == @Reservation.ReserverId && @Reservation.IsConfirmed == false)
                 {
-                    <button class="btn btn-danger">Delete</button>
+                    <form method="post" asp-page-handler="Confirm" asp-route-id="@Reservation.ReservationId">
+                    <button class="btn btn-primary"><i class="fa-solid fa-check" title="Confirm"></i></button>
+                    </form>
                 }
-                </form>
-                <form method="post" asp-page-handler="Edit" asp-route-id="@Reservation.ReservationId">
-                @if(Model.UserId == @Reservation.ReserverId)
+                else
                 {
-                    <button class="btn btn-danger">Edit</button>
+                    <text>Confirmed</text><i class="fa-solid fa-check-double"></i>
                 }
-                </form>
             </td>
-            }
+            <td>
+                @if(Model.UserId == @Reservation.ReserverId && @Reservation.IsConfirmed == false)
+                {
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@Reservation.ReservationId">
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+                    </form>
+                }
+                else if (Model.UserId == @Reservation.ReserverId)
+                {
+                    <text>Deletable via Profile</text>
+                }
+                else
+                {
+                    <i class="fa-solid fa-ghost"></i>
+                }
+            </td>
+            <td>
+                @if(Model.UserId == @Reservation.ReserverId && @Reservation.IsConfirmed == false)
+                {
+                    <button class="btn btn-danger btn-mymodal" data-toggle="modal" data-target="#myModal" data-id="@Reservation.ReservationId"><i class="fa-solid fa-pen-to-square"  title="Edit"></i></button>
+                }
+                else
+                {
+                    <i class="fa-solid fa-ghost"></i>
+                }
+            </td>
         </tr>
     }
     </tbody>
 </table>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-id="data">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <div class="modal-body">
+            <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="data">
+                @* <input type="hidden" asp-for="Input.ReservationId" /> *@
+                <div class="form-group">
+                    <label asp-for="Input.RoomId" class="col-form-label"></label>
+                    <select asp-for="Input.RoomId" class="form-control" id="PizzaSize">
+                        <option value="">-- Select Room --</option>
+                    @foreach (var room in Model.RoomList)
+                    {
+                        <option value="@room.RoomId">@room.RoomName</option>
+                    }
+                    </select>
+                    <span asp-validation-for="Input.RoomId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Date" class="col-form-label"></label>
+                    <input asp-for="Input.Date" class="form-control" type="date" min="@todayString" max="@lastdayString"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @* <button type="submit" class="btn btn-primary" id="editReservationForm">Save changes</button> *@
+              </div>
+            </div>
+        </div>
+    </div>
+
+    

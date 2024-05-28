@@ -9,9 +9,15 @@ public partial class Reservation
 
     public DateOnly Date { get; set; }
 
-    public string ReserverId { get; set; } = null!;
+    public bool IsDeleted { get; set; }
+
+    public bool IsCanceled { get; set; }
+
+    public bool IsConfirmed { get; set; }
 
     public int RoomId { get; set; }
-    
+
+    public string ReserverId { get; set; } = null!;
+
     public virtual Room Room { get; set; } = null!;
 }

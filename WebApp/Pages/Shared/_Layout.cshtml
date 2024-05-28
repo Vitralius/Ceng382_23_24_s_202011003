@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/71fc6a41c7.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
 </head>
 <body>
     <header>
@@ -32,26 +36,16 @@
                         }
                         @{
                         if (User.Identity?.IsAuthenticated ?? false){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AddRooms">Add Rooms</a>
-                        </li>
-                        }}
-                        @{
-                        if (User.Identity?.IsAuthenticated ?? false){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/ListRooms">List Rooms</a>
-                        </li>
-                        }}
-                        @{
-                        if (User.Identity?.IsAuthenticated ?? false){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AddReservations">Add Reservations</a>
-                        </li>
-                        }}
-                        @{
-                        if (User.Identity?.IsAuthenticated ?? false){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/ListReservations">List Reservations</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-info text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Challenges
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AddRooms">Add Rooms</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/ListRooms">List Rooms</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AddReservations">Add Reservations</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/ListReservations">List Reservations</a>
+                            </div>
                         </li>
                         }}
                     </ul>

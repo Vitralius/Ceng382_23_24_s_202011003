@@ -19,6 +19,4 @@ public class ApplicationDbContext : IdentityDbContext
         var connectionString = builder.Configuration.GetConnectionString ("WebAppConnection");
         optionsBuilder.UseSqlServer(connectionString);
     }
-    public DbSet<Room> Rooms { get; set; }
-    public DbSet<Reservation> Reservations { get; set; }
 }

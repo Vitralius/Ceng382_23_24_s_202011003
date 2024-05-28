@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApp.Data;
+using WebApp.Models;
 
 #nullable disable
 
-namespace WebApp.Data.Migrations
+namespace WebApp.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240523114850_ReservationsAndRooms")]
-    partial class ReservationsAndRooms
+    [DbContext(typeof(RoomsAndReservationsDatabaseContext))]
+    partial class RoomsAndReservationsDatabaseContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,49 +26,77 @@ namespace WebApp.Data.Migrations
                 {
                     b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("reservationId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
 
                     b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("date");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit")
+                        .HasColumnName("isCanceled");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit")
+                        .HasColumnName("isConfirmed");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("isDeleted");
 
                     b.Property<string>("ReserverId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("reserverId");
 
                     b.Property<int>("RoomId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("roomId");
 
                     b.HasKey("ReservationId");
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("reservations", (string)null);
                 });
 
             modelBuilder.Entity("WebApp.Models.Room", b =>
                 {
                     b.Property<int>("RoomId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("roomId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
                     b.Property<int>("Capacity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("capacity");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("isDeleted");
+
+                    b.Property<bool>("IsReservable")
+                        .HasColumnType("bit")
+                        .HasColumnName("isReservable");
 
                     b.Property<string>("OwnerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ownerId");
 
                     b.Property<string>("RoomName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("roomName");
 
                     b.HasKey("RoomId");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("rooms", (string)null);
                 });
 
             modelBuilder.Entity("WebApp.Models.Reservation", b =>

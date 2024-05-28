@@ -3,38 +3,71 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using WebApp.Data;
 using WebApp.Models;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+#nullable disable
 
 namespace WebApp.Pages;
     [Authorize]
     public class AddRoomsModel : PageModel
     {
         [BindProperty]
-        public Room Room { get; set; } = default!;
-
-        public ApplicationDbContext AppDb = new();
-        public List<Room> roomList { get; set; } = default!;
+        public Room Room { get; set; } = new Room();
+        [BindProperty]
+        public InputModel Input { get; set; }
+        private readonly RoomsAndReservationsDatabaseContext AppDb;
+        public List<Room> RoomList { get; set; } = new List<Room>();
         private readonly ILogger<AddRoomsModel> _logger;
-        public AddRoomsModel(ILogger<AddRoomsModel> logger)
+        public string UserId { get; set; } = default!;
+        public AddRoomsModel(ILogger<AddRoomsModel> logger, RoomsAndReservationsDatabaseContext Db)
         {
+            AppDb = Db;
             _logger = logger;
         }
-        public void OnGet()
+        public class InputModel
         {
-            roomList = (from item in AppDb.Rooms
-                     select item).ToList();
+            [Display(Name = "Room Name")]
+            public string RoomName { get; set; } = default!;
+            [Display(Name = "Capacity")]
+            public int Capacity { get; set; }
+        }
+        private async Task LoadAsync()
+        {
+            RoomList = await AppDb.Rooms.ToListAsync();
+            Input = new InputModel
+            {
+                RoomName = "null",
+                Capacity = 0
+            };
+        }
+        public async Task<IActionResult> OnGetAsync()
+        {
+            UserId = HttpContext.Session.GetString("userId") ?? string.Empty;
+            await LoadAsync();
+            return Page();
         }
 
-         public IActionResult OnPost()
+         public async Task<IActionResult> OnPostAddAsync()
          {
+             var id =  HttpContext.Session.GetString("userId") ?? string.Empty;
              if (Room == null)
              {
+                _logger.LogInformation("Room is null.");
                  return Page();
              }
-             Room.OwnerId = HttpContext.Session.GetString("userId") ?? string.Empty;
-             AppDb.Rooms.Add(Room);
-             AppDb.SaveChanges();
+             Room = new Room
+             {
+                RoomName = Input.RoomName,
+                Capacity = Input.Capacity,
+                IsDeleted = false,
+                IsReservable = true,
+                OwnerId = id
+             };
+             await AppDb.Rooms.AddAsync(Room);
+             await AppDb.SaveChangesAsync();
              _logger.LogInformation("Room is added.");
-             return RedirectToAction("Get");
-         }
+             return RedirectToPage();
+        }
     }
 
