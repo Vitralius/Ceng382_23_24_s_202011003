@@ -19,6 +19,7 @@ namespace WebApp.Pages;
         public Reservation Reservation { get; set; } = new Reservation();
         [BindProperty]
         public InputModel Input { get; set; }
+        public ReservationLog reservationLog { get; set; } = new ReservationLog();
         public List<Room> RoomList { get; set; } = new List<Room>();
         public string UserId { get; set; } = default!;
         public AddReservationsModel(ILogger<AddReservationsModel> logger, RoomsAndReservationsDatabaseContext Db)
@@ -36,7 +37,7 @@ namespace WebApp.Pages;
         }
         private async Task LoadAsync()
         {
-            RoomList = await AppDb.Rooms.Where(room => room.Capacity > 0).ToListAsync();
+            RoomList = await AppDb.Rooms.Where(room => room.Capacity > 0 && room.IsDeleted == false).ToListAsync();
             RoomList.Sort((room1, room2) => room1.RoomName.CompareTo(room2.RoomName));
             Input = new InputModel
             {
@@ -74,10 +75,31 @@ namespace WebApp.Pages;
                 IsConfirmed = false,
                 IsDeleted = false
              };
-             await AppDb.Reservations.AddAsync(Reservation);
-             _logger.LogInformation("Reservation is added.");
+            
+            await AppDb.Reservations.AddAsync(Reservation);
+            _logger.LogInformation("Reservation is added.");
             await AppDb.SaveChangesAsync();
+
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(item => item.ReservationId == Reservation.ReservationId);
+            await LogAsync(reservation);
             return RedirectToPage();
          }
+        private async Task LogAsync(Reservation R)
+        {
+
+            reservationLog = new ReservationLog 
+            {
+                Status = "CREATED",
+                IsDeleted = false,
+                UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                // ReservationId = reservation.ReservationId,
+                ReservationId = R.ReservationId, 
+                LogDate = DateTime.Now,
+                Date = R.Date,
+                RoomId = R.RoomId,
+            };
+            await AppDb.ReservationLogs.AddAsync(reservationLog);
+            await AppDb.SaveChangesAsync();
+        }
     }
 

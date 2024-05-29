@@ -11,12 +11,20 @@
 @section scripts{
    <script>
         $(function () {
-            $('button.btn-mymodal').on('click', function () {
-                $('#myModal').trigger('focus');
+            $('button.search').on('click', function () {
+                $('#modelEdit2').trigger('focus');
+            });
+        });
+    </script>
+   <script>
+        $(function () {
+            $('button.edit').on('click', function () {
+                $('#modelEdit').trigger('focus');
             });
         });
     </script>
 }
+
 <h1>@ViewData["Title"]</h1>
 <p>Use this page to list Reservation.</p>
 
@@ -84,7 +92,7 @@
                 </a>
             </th>
             <th scope="col">Delete</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Edit  <button class="btn btn-danger edit" data-toggle="modal" data-target="#modalEdit"><i class="fa-solid fa-pen-to-square" title="Edit"></i></button></th>
         </tr>
     </thead>
     <tbody>
@@ -93,8 +101,6 @@
         <tr>
             <td>@Reservation.Room.RoomName</td>
             <td>@Reservation.Room.Capacity</td>
-            @* <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).RoomName</td>
-            <td>@Model.roomList.FirstOrDefault(item => item.RoomId == Reservation.RoomId).Capacity</td> *@
             <td>@Reservation.Date.ToShortDateString()</td>
             <td>
                 
@@ -128,7 +134,8 @@
             <td>
                 @if(Model.UserId == @Reservation.ReserverId && @Reservation.IsConfirmed == false)
                 {
-                    <button class="btn btn-danger btn-mymodal" data-toggle="modal" data-target="#myModal" data-id="@Model.Id"><i class="fa-solid fa-pen-to-square"  title="Edit"></i></button>
+                    
+                    <text>Editable</text>
                 }
                 else
                 {
@@ -139,40 +146,73 @@
     }
     </tbody>
 </table>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-id="data">
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Edit Reservation</h5>
+                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Id</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
             <div class="modal-body">
-            <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit">
-                <input type="hidden" asp-for="@Model.Id" />
-                <div class="form-group">
-                    <label asp-for="Input.RoomId" class="col-form-label"></label>
-                    <select asp-for="Input.RoomId" class="form-control" id="PizzaSize">
-                        <option value="">-- Select Room --</option>
-                    @foreach (var room in Model.RoomList)
-                    {
-                        <option value="@room.RoomId">@room.RoomName</option>
-                    }
-                    </select>
-                    <span asp-validation-for="Input.RoomId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Date" class="col-form-label"></label>
-                    <input asp-for="Input.Date" class="form-control" type="date" min="@todayString" max="@lastdayString"/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
+            <label asp-for="@Model.Id" class="control-label" value="Reservation"></label>
+            <select asp-for="@Model.Id" id="PizzaSize" aria-placeholder="Select Reservation">
+            @foreach (var reservation in Model.ReservationList)
+            {
+                <option value="@reservation.ReservationId">Room: @reservation.Room.RoomName Date: @reservation.Date</option>
+            }
+            </select>
+            <input type="submit" value="Search" class="btn btn-primary" />
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                @* <button type="submit" class="btn btn-primary" id="editReservationForm">Save changes</button> *@
+                <button class="btn btn-danger edit" data-toggle="modal" data-target="#modalEdit2"><i class="fa-solid fa-pen-to-square" title="Edit"></i></button></th>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEdit2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Id</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <div class="modal-body">
+                @if(@Model.Id > 0 )
+                {
+                    <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="@Model.Id">
+                    <div class="form-group">
+                        <label asp-for="Input.RoomId" class="col-form-label"></label>
+                        <select asp-for="Input.RoomId" class="form-control" id="PizzaSize" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Id).Room.RoomName" >
+                            <option value="">-- Select Room --</option>
+                        @foreach (var room in Model.RoomList)
+                        {
+                            <option value="@room.RoomId">@room.RoomName</option>
+                        }
+                        </select>
+                        <span asp-validation-for="Input.RoomId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                     <label asp-for="Input.Date" class="col-form-label"></label>
+                     <input asp-for="Input.Date" class="form-control" placeholder="@todayString" type="date" min="@todayString" max="@lastdayString" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Id).Date"/>
+                   </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+                }
+                else
+                {
+                    <br>
+                    <text>Pls choose a reservation first!</text>
+                }
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @* <button type="submit" class="btn btn-primary form-group" id="editReservationForm">Save changes</button> *@
               </div>
             </div>
         </div>

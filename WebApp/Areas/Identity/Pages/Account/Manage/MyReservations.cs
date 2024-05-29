@@ -17,6 +17,7 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
         public readonly RoomsAndReservationsDatabaseContext AppDb;
         private readonly UserManager<IdentityUser> UserManager;
         public List<Reservation> ReservationList { get; set; } = new List<Reservation>();
+        public ReservationLog reservationLog{ get; set; } = new ReservationLog();
         public MyReservationsModel (UserManager<IdentityUser> _userManager, RoomsAndReservationsDatabaseContext Db)
         {
             UserManager = _userManager;
@@ -26,7 +27,7 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(IdentityUser user)
         {
             var userId = await UserManager.GetUserIdAsync(user);
-            ReservationList = await AppDb.Reservations.Where(item => item.ReserverId == userId && item.IsDeleted == false).ToListAsync();
+            ReservationList = await AppDb.Reservations.Where(item => item.ReserverId == userId && item.IsDeleted == false && item.IsConfirmed == true).ToListAsync();
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -61,7 +62,18 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
                     room.Capacity = room.Capacity + 1;
                     find.IsCanceled = true;
                 }
-            } 
+            }
+            reservationLog = new ReservationLog 
+            {
+                Status = "CANCELED",
+                IsDeleted = false,
+                UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                ReservationId = find.ReservationId,
+                LogDate = DateTime.Now,
+                Date = find.Date,
+                RoomId = find.RoomId,
+            };
+            await AppDb.ReservationLogs.AddAsync(reservationLog);    
             await AppDb.SaveChangesAsync();
 
             return RedirectToPage();
@@ -82,9 +94,20 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
             var find = await AppDb.Reservations.FirstOrDefaultAsync(c => c.ReservationId == id);
             if (find != null)
             {
+                reservationLog = new ReservationLog 
+                {
+                    Status = "DELETED",
+                    IsDeleted = true,
+                    UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                    ReservationId = find.ReservationId,
+                    LogDate = DateTime.Now,
+                    Date = find.Date,
+                    RoomId = find.RoomId,
+                };
+                await AppDb.ReservationLogs.AddAsync(reservationLog);
                 find.IsDeleted = true;
             }   
-            
+        
             await AppDb.SaveChangesAsync();
 
             return RedirectToPage();

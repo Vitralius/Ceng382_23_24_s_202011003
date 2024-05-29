@@ -63,9 +63,9 @@
                 }
             </td>
             <td>
-                @if(Room.OwnerId == Model.UserId)
+                @if(Room.OwnerId == Model.UserId && Room.IsDeleted == false)
                 {
-                    <form method="post" asp-page-handler="Cancel" asp-route-id="@Room.RoomId">
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@Room.RoomId">
                     <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
                     </form>
                 }

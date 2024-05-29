@@ -17,7 +17,11 @@ public partial class RoomsAndReservationsDatabaseContext : DbContext
 
     public virtual DbSet<Reservation> Reservations { get; set; }
 
+    public virtual DbSet<ReservationLog> ReservationLogs { get; set; }
+
     public virtual DbSet<Room> Rooms { get; set; }
+
+    public virtual DbSet<RoomLog> RoomLogs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -31,6 +35,8 @@ public partial class RoomsAndReservationsDatabaseContext : DbContext
         {
             entity.ToTable("reservations");
 
+            entity.HasIndex(e => e.RoomId, "IX_reservations_roomId");
+
             entity.Property(e => e.ReservationId).HasColumnName("reservationId");
             entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.IsCanceled).HasColumnName("isCanceled");
@@ -40,6 +46,26 @@ public partial class RoomsAndReservationsDatabaseContext : DbContext
             entity.Property(e => e.RoomId).HasColumnName("roomId");
 
             entity.HasOne(d => d.Room).WithMany(p => p.Reservations).HasForeignKey(d => d.RoomId);
+        });
+
+        modelBuilder.Entity<ReservationLog>(entity =>
+        {
+            entity.HasKey(e => e.LogId);
+
+            entity.ToTable("reservation_log");
+
+            entity.Property(e => e.LogId).HasColumnName("logId");
+            entity.Property(e => e.LogDate).HasColumnName("logDate");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            entity.Property(e => e.ReservationId).HasColumnName("reservationId");
+            entity.Property(e => e.RoomId).HasColumnName("roomId");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasColumnName("status");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(450)
+                .HasColumnName("userId");
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -52,6 +78,24 @@ public partial class RoomsAndReservationsDatabaseContext : DbContext
             entity.Property(e => e.IsReservable).HasColumnName("isReservable");
             entity.Property(e => e.OwnerId).HasColumnName("ownerId");
             entity.Property(e => e.RoomName).HasColumnName("roomName");
+        });
+
+        modelBuilder.Entity<RoomLog>(entity =>
+        {
+            entity.HasKey(e => e.LogId);
+
+            entity.ToTable("room_log");
+
+            entity.Property(e => e.LogId).HasColumnName("logId");
+            entity.Property(e => e.LogDate).HasColumnName("logDate");
+            entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
+            entity.Property(e => e.RoomId).HasColumnName("roomId");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasColumnName("status");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(450)
+                .HasColumnName("userId");
         });
 
         OnModelCreatingPartial(modelBuilder);

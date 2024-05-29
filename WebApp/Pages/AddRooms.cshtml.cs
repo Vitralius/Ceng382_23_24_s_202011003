@@ -17,8 +17,9 @@ namespace WebApp.Pages;
         [BindProperty]
         public InputModel Input { get; set; }
         private readonly RoomsAndReservationsDatabaseContext AppDb;
-        public List<Room> RoomList { get; set; } = new List<Room>();
         private readonly ILogger<AddRoomsModel> _logger;
+        public List<Room> RoomList { get; set; } = new List<Room>();
+        public RoomLog roomLog { get; set; } = new RoomLog();
         public string UserId { get; set; } = default!;
         public string PlaceHolder { get; set; }
         public AddRoomsModel(ILogger<AddRoomsModel> logger, RoomsAndReservationsDatabaseContext Db)
@@ -70,11 +71,31 @@ namespace WebApp.Pages;
                 IsDeleted = false,
                 IsReservable = true,
                 OwnerId = id
-             };
+             }; 
              await AppDb.Rooms.AddAsync(Room);
              await AppDb.SaveChangesAsync();
              _logger.LogInformation("Room is added.");
-             return RedirectToPage();
+
+            var room = await AppDb.Rooms.FirstOrDefaultAsync(item => item.RoomId == Room.RoomId);
+            if (room == null)
+            {
+                return Page();
+            }
+            await LogAsync(room.RoomId);
+            return RedirectToPage();
+        }
+        private async Task LogAsync(int id)
+        {
+             roomLog = new RoomLog 
+            {
+                Status = "CREATED",
+                IsDeleted = false,
+                UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                LogDate = DateTime.Now,
+                RoomId = id, 
+            };
+            await AppDb.RoomLogs.AddAsync(roomLog);
+            await AppDb.SaveChangesAsync();
         }
     }
 

@@ -58,9 +58,55 @@ namespace WebApp.Migrations
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex(new[] { "RoomId" }, "IX_reservations_roomId");
 
                     b.ToTable("reservations", (string)null);
+                });
+
+            modelBuilder.Entity("WebApp.Models.ReservationLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("logId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogId"));
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date")
+                        .HasColumnName("date");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("isDeleted");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("logDate");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int")
+                        .HasColumnName("reservationId");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int")
+                        .HasColumnName("roomId");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("userId");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("reservation_log", (string)null);
                 });
 
             modelBuilder.Entity("WebApp.Models.Room", b =>
@@ -97,6 +143,44 @@ namespace WebApp.Migrations
                     b.HasKey("RoomId");
 
                     b.ToTable("rooms", (string)null);
+                });
+
+            modelBuilder.Entity("WebApp.Models.RoomLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("logId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("isDeleted");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("logDate");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int")
+                        .HasColumnName("roomId");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("userId");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("room_log", (string)null);
                 });
 
             modelBuilder.Entity("WebApp.Models.Reservation", b =>

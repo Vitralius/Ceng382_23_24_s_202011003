@@ -12,6 +12,42 @@ namespace WebApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "reservation_log",
+                columns: table => new
+                {
+                    logId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    roomId = table.Column<int>(type: "int", nullable: false),
+                    reservationId = table.Column<int>(type: "int", nullable: false),
+                    date = table.Column<DateOnly>(type: "date", nullable: false),
+                    logDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reservation_log", x => x.logId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "room_log",
+                columns: table => new
+                {
+                    logId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    roomId = table.Column<int>(type: "int", nullable: false),
+                    logDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_room_log", x => x.logId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "rooms",
                 columns: table => new
                 {
@@ -62,7 +98,13 @@ namespace WebApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "reservation_log");
+
+            migrationBuilder.DropTable(
                 name: "reservations");
+
+            migrationBuilder.DropTable(
+                name: "room_log");
 
             migrationBuilder.DropTable(
                 name: "rooms");

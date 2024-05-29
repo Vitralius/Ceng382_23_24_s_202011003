@@ -18,6 +18,7 @@ namespace WebApp.Pages;
         public List<Reservation> ReservationList { get; set; } = new List<Reservation>();
         public List<Room> RoomList { get; set; } = new List<Room>();
         public Reservation AddedReservation { get; set; } = new Reservation();
+        public ReservationLog reservationLog { get; set; } = new ReservationLog();
         [BindProperty]
         public InputModel Input { get; set; }
         public int Id { get; set; }
@@ -49,12 +50,13 @@ namespace WebApp.Pages;
                 RoomId = 0,
                 Date = new DateOnly()
             };
+            Id = 0;
             //Listing part
             var today = DateTime.Today;
             var lastday = today.AddDays(7-(int)today.DayOfWeek);
-            ReservationList = await AppDb.Reservations.Where(reservation => reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear < lastday.DayOfYear).ToListAsync();
-            RoomList = await AppDb.Rooms.ToListAsync();
-            // ReservationList.Sort((room1, room2) => room1.RoomName.CompareTo(room2.RoomName));
+            var id = HttpContext.Session.GetString("userId") ?? string.Empty;
+            ReservationList = await AppDb.Reservations.Where(reservation => reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear < lastday.DayOfYear && reservation.IsDeleted == false && reservation.ReserverId == id).ToListAsync();
+            RoomList = await AppDb.Rooms.Where(room => room.Capacity > 0 && room.IsDeleted == false && room.IsReservable == true).ToListAsync();
             RoomNameFilter = searchString1;
             RoomCapacityFilter = Convert.ToInt32(searchString2);
             if(!String.IsNullOrEmpty(searchString3))
@@ -82,10 +84,6 @@ namespace WebApp.Pages;
             {
                 sortingList = sortingList.Where(r => r.Date == DateOnly.Parse(searchString3));
             }
-            // else
-            // {
-            //     sortingList = sortingList.Where(r => r.IsConfirmed == searchString4);
-            // }
 
             switch (sortOrder)
             {
@@ -124,44 +122,52 @@ namespace WebApp.Pages;
         }
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
-            if (AppDb.Reservations != null)
+            if (AppDb.Reservations == null)
             {
-                var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
-                if (reservation != null)
-                {
-                    reservation.IsDeleted = true;
-                    _logger.LogInformation("Reservation is deleted");
-                }
-         }
+                return Page();
+            }
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
+            if (reservation == null)
+            {
+                return Page();
+            }
+         reservation.IsDeleted = true;
+         _logger.LogInformation("Reservation is deleted.");
          await AppDb.SaveChangesAsync();
+         await LogAsync(reservation.ReservationId, "DELETED");
          return RedirectToPage();
         }
         public async Task<IActionResult> OnPostConfirmAsync(int id)
         {
-            if (AppDb.Reservations != null)
+            if (AppDb.Reservations == null)
             {
-                var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
-                if (reservation != null)
-                {
-                    var room = await AppDb.Rooms.FirstOrDefaultAsync(item => item.RoomId == reservation.RoomId);
-                    if (room != null && room.Capacity > 0)
-                    {
-                        room.Capacity = room.Capacity - 1;
-                        reservation.IsConfirmed = true;
-                        _logger.LogInformation("Reservation is cofirmed and corresponding room capacity decreased.");
-                    }
-                    else 
-                    {
-                        _logger.LogInformation("Room capacity is insufficient.");
-                    }
-                }
-         }
+                return Page();
+            }
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
+            if (reservation == null)
+            {
+                return Page();
+            }
+            var room = await AppDb.Rooms.FirstOrDefaultAsync(item => item.RoomId == reservation.RoomId);
+            if (room == null)
+            {
+                return Page();
+            }
+            if (room.Capacity == 0)
+            {
+                _logger.LogInformation("Room capacity is insufficient.");
+                return Page();
+            }
+         room.Capacity = room.Capacity - 1;
+         reservation.IsConfirmed = true;
+         _logger.LogInformation("Reservation is cofirmed and corresponding room capacity decreased.");
          await AppDb.SaveChangesAsync();
+         await LogAsync(reservation.ReservationId, "CONFIRMED");
          return RedirectToPage();
      }
-        public async Task<IActionResult> OnPostEditAsync()
+        public async Task<IActionResult> OnPostEditAsync(int id)
         {
-            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == Id);
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
             if (reservation == null)
             {
               return NotFound();
@@ -177,6 +183,53 @@ namespace WebApp.Pages;
             AppDb.Update(reservation);
             await AppDb.SaveChangesAsync();
             return RedirectToPage();
+        }
+        private async Task LogAsync(int id, string S)
+        {
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r => r.ReservationId == id);
+            switch (S)
+            {
+                case "DELETED":
+                reservationLog = new ReservationLog 
+                {
+                    Status = S,
+                    IsDeleted = true,
+                    UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                    ReservationId = id,
+                    LogDate = DateTime.Now,
+                    Date = reservation.Date,
+                    RoomId = reservation.RoomId,
+                };
+                break;
+
+                case "CONFIRMED":
+                reservationLog = new ReservationLog 
+                {
+                    Status = S,
+                    IsDeleted = false,
+                    UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                    ReservationId = id,
+                    LogDate = DateTime.Now,
+                    Date = reservation.Date,
+                    RoomId = reservation.RoomId,
+                };
+                break;
+
+                case "EDITED":
+                reservationLog = new ReservationLog 
+                {
+                    Status = S,
+                    IsDeleted = false,
+                    UserId = HttpContext.Session.GetString("userId") ?? string.Empty,
+                    ReservationId = id,
+                    LogDate = DateTime.Now,
+                    Date = reservation.Date,
+                    RoomId = reservation.RoomId,
+                };
+                break;
+            }
+            await AppDb.ReservationLogs.AddAsync(reservationLog);
+            await AppDb.SaveChangesAsync();
         }
     }
 
