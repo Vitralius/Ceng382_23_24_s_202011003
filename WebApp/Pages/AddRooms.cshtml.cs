@@ -20,6 +20,7 @@ namespace WebApp.Pages;
         public List<Room> RoomList { get; set; } = new List<Room>();
         private readonly ILogger<AddRoomsModel> _logger;
         public string UserId { get; set; } = default!;
+        public string PlaceHolder { get; set; }
         public AddRoomsModel(ILogger<AddRoomsModel> logger, RoomsAndReservationsDatabaseContext Db)
         {
             AppDb = Db;
@@ -28,16 +29,17 @@ namespace WebApp.Pages;
         public class InputModel
         {
             [Display(Name = "Room Name")]
-            public string RoomName { get; set; } = default!;
+            public string RoomName { get; set; }
             [Display(Name = "Capacity")]
             public int Capacity { get; set; }
         }
         private async Task LoadAsync()
         {
             RoomList = await AppDb.Rooms.ToListAsync();
+            PlaceHolder = null;
             Input = new InputModel
             {
-                RoomName = "null",
+                RoomName =  null,
                 Capacity = 0
             };
         }
@@ -55,6 +57,11 @@ namespace WebApp.Pages;
              {
                 _logger.LogInformation("Room is null.");
                  return Page();
+             }
+             if (Input.RoomName == null)
+             {
+                PlaceHolder="Must enter a valid room name";
+                return Page();
              }
              Room = new Room
              {

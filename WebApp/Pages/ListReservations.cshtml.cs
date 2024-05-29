@@ -20,6 +20,7 @@ namespace WebApp.Pages;
         public Reservation AddedReservation { get; set; } = new Reservation();
         [BindProperty]
         public InputModel Input { get; set; }
+        public int Id { get; set; }
         public string UserId { get; set; } = null!;
         public string RoomNameSort { get; set; } = null!;
         public string RoomCapacitySort { get; set; } = null!;
@@ -158,9 +159,9 @@ namespace WebApp.Pages;
          await AppDb.SaveChangesAsync();
          return RedirectToPage();
      }
-        public async Task<IActionResult> OnPostEditAsync(int id)
+        public async Task<IActionResult> OnPostEditAsync()
         {
-            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == Id);
             if (reservation == null)
             {
               return NotFound();

@@ -11,7 +11,7 @@
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="form-group">
     <label asp-for="Input.RoomName" class="control-label" placeholder="Please choose room name."></label>
-    <input asp-for="Input.RoomName" class="form-control" />
+    <input asp-for="Input.RoomName" class="form-control" placeholder="@Model.PlaceHolder" />
     <span asp-validation-for="Input.RoomName" class="text-danger"></span>
 </div>
 <div class="form-group">

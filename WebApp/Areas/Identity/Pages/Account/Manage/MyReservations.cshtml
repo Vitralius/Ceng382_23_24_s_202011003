@@ -24,7 +24,7 @@
                 @* <td>@reservation.Room.RoomName</td> *@
                 <td>@reservation.Date</td>
                 <td>
-                @if(reservation.IsDeleted==false)
+                @if(reservation.IsDeleted==false && reservation.IsCanceled==false)
                 {
                     <form method="post" asp-page-handler="Cancel" asp-route-id="@reservation.ReservationId">
                     <button class="btn btn-danger"><i class="fa-solid fa-star" title="Cancel"></i></button>
@@ -36,7 +36,7 @@
                 }
                 </td>
                 <td>
-                @if(reservation.IsCanceled==false)
+                @if(reservation.IsCanceled==true)
                 {
                     <form method="post" asp-page-handler="Delete" asp-route-id="@reservation.ReservationId">
                     <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>

@@ -64,7 +64,6 @@ namespace WebApp.Pages;
                 _logger.LogInformation("Room is null");
                 return Page();
              }
-             room.Capacity = room.Capacity-1;
              Reservation = new Reservation
              {
                 ReserverId = id,
