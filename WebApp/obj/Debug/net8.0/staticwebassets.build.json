@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tb9i/dl4WHejVCEgDEixKEpLkNmCcvGpH89IsKxkUnI=",
+  "Hash": "p4kuIWYfMyrHT+2a+mz+t8RuW5uR06Gu/5btyk2e9ow=",
   "Source": "WebApp",
   "BasePath": "_content/WebApp",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\user\\Desktop\\Lecture Stuff\\Ceng_382_Lab\\Ceng382_23_24_s_202011003\\WebApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebApp.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\Lecture Stuff\\Ceng_382_Lab\\Ceng382_23_24_s_202011003\\WebApp\\wwwroot\\css\\DPS.css",
+      "SourceId": "WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\Lecture Stuff\\Ceng_382_Lab\\Ceng382_23_24_s_202011003\\WebApp\\wwwroot\\",
+      "BasePath": "_content/WebApp",
+      "RelativePath": "css/DPS.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\DPS.css"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\Lecture Stuff\\Ceng_382_Lab\\Ceng382_23_24_s_202011003\\WebApp\\wwwroot\\css\\site.css",

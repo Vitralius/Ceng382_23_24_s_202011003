@@ -21,6 +21,7 @@ namespace WebApp.Pages;
         public ReservationLog reservationLog { get; set; } = new ReservationLog();
         [BindProperty]
         public InputModel Input { get; set; }
+        public InputModel2 Input2 { get; set; }
         public int Id { get; set; }
         public string UserId { get; set; } = null!;
         public string RoomNameSort { get; set; } = null!;
@@ -36,6 +37,11 @@ namespace WebApp.Pages;
             AppDb = Db;
             _logger = logger;
         }
+        public class InputModel2
+        {
+            [Display(Name = "Id")]
+            public int ReservationId { get; set; }
+        }
         public class InputModel
         {
             [Display(Name = "Room Name")]
@@ -50,7 +56,11 @@ namespace WebApp.Pages;
                 RoomId = 0,
                 Date = new DateOnly()
             };
-            Id = 0;
+            Input2 = new InputModel2
+            {
+                ReservationId = 0,
+            };
+            // Id = 0;
             //Listing part
             var today = DateTime.Today;
             var lastday = today.AddDays(7-(int)today.DayOfWeek);
@@ -164,7 +174,12 @@ namespace WebApp.Pages;
          await AppDb.SaveChangesAsync();
          await LogAsync(reservation.ReservationId, "CONFIRMED");
          return RedirectToPage();
-     }
+        }
+        private async Task OnPostLoadIdAsync(int id)
+        {
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r=>r.ReservationId == id);
+            Id = reservation.ReservationId;
+        }
         public async Task<IActionResult> OnPostEditAsync(int id)
         {
             var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);

@@ -1,0 +1,50 @@
+@page
+@using Microsoft.AspNetCore.Http
+@model ReservationScheduleModel
+@{
+    ViewData["Title"] = "List Reservation";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>Use this page to Scedule Reservation.</p>
+
+<body>
+    
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th class="titelCell" align="center">Room/Date</th>
+                @foreach (var date in Model.Dates)
+                {
+                    <th class="titelCell" align="center">@date</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model.RoomList)
+            {
+                <tr>
+                    <td class="ticCell">@room.RoomName @Model.ReservationList.Count</td>
+                    @foreach (var date in Model.Dates)
+                    {
+                        @foreach(var reservation in Model.ReservationList)
+                        {
+                            if (reservation != null && reservation.Room.RoomId == room.RoomId && reservation.Date==date)
+                            {
+                                <td class="ticCell">
+                                    <div>@reservation.Room.RoomName</div>
+                                    <div>@reservation.Date</div>
+                                </td>
+                            }
+                            else if (reservation.Date<date)
+                            {
+                                <td class="ticCell">Available</td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+

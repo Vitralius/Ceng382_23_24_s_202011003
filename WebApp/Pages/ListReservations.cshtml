@@ -67,7 +67,7 @@
         </p>
     </div>
 </form>
-
+<a asp-page="./ReservationSchedule">Schedule</a>
 <table class="table mt-5">
     <thead>
         <tr>
@@ -156,14 +156,16 @@
                 </button>
               </div>
             <div class="modal-body">
-            <label asp-for="@Model.Id" class="control-label" value="Reservation"></label>
-            <select asp-for="@Model.Id" id="PizzaSize" aria-placeholder="Select Reservation">
-            @foreach (var reservation in Model.ReservationList)
-            {
-                <option value="@reservation.ReservationId">Room: @reservation.Room.RoomName Date: @reservation.Date</option>
-            }
-            </select>
-            <input type="submit" value="Search" class="btn btn-primary" />
+            <form id="editReservationForm" method="post">
+                <label asp-for="Input2.ReservationId" class="control-label" value="Reservation"></label>
+                <select asp-for="Input2.ReservationId" id="PizzaSize" aria-placeholder="Select Reservation">
+                @foreach (var reservation in Model.ReservationList)
+                {
+                    <option value="@reservation.ReservationId">Room: @reservation.Room.RoomName Date: @reservation.Date</option>
+                }
+                </select>
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </form>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button class="btn btn-danger edit" data-toggle="modal" data-target="#modalEdit2"><i class="fa-solid fa-pen-to-square" title="Edit"></i></button></th>
@@ -183,7 +185,7 @@
             <div class="modal-body">
                 @if(@Model.Id > 0 )
                 {
-                    <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="@Model.Id">
+                    <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="Input2.RoomId">
                     <div class="form-group">
                         <label asp-for="Input.RoomId" class="col-form-label"></label>
                         <select asp-for="Input.RoomId" class="form-control" id="PizzaSize" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Id).Room.RoomName" >
