@@ -24,23 +24,25 @@
             @foreach (var room in Model.RoomList)
             {
                 <tr>
-                    <td class="ticCell">@room.RoomName @Model.ReservationList.Count</td>
+                    <td class="ticCell">@room.RoomName</td>
                     @foreach (var date in Model.Dates)
                     {
+                        <td class="ticCell">
                         @foreach(var reservation in Model.ReservationList)
                         {
-                            if (reservation != null && reservation.Room.RoomId == room.RoomId && reservation.Date==date)
+                            
+                            @if (reservation != null && reservation.Room == room && reservation.Date==date)
                             {
-                                <td class="ticCell">
-                                    <div>@reservation.Room.RoomName</div>
-                                    <div>@reservation.Date</div>
-                                </td>
+                                
+                                <div style="color: Red;">RESERVED</div>
+                                break;
                             }
-                            else if (reservation.Date<date)
+                            else if (reservation != null && reservation.Room == room)
                             {
-                                <td class="ticCell">Available</td>
+                                <div>Available</div>
                             }
                         }
+                        </td>
                     }
                 </tr>
             }

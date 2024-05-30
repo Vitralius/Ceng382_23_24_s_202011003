@@ -156,7 +156,7 @@
                 </button>
               </div>
             <div class="modal-body">
-            <form id="editReservationForm" method="post">
+            <form id="editReservationForm" method="post" asp-page-handler="Id">
                 <label asp-for="Input2.ReservationId" class="control-label" value="Reservation"></label>
                 <select asp-for="Input2.ReservationId" id="PizzaSize" aria-placeholder="Select Reservation">
                 @foreach (var reservation in Model.ReservationList)

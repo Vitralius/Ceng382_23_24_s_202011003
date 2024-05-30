@@ -127,9 +127,14 @@ namespace WebApp.Pages;
         public async Task<IActionResult> OnGetAsync(string sortOrder, string searchString1, string searchString2, string searchString3, bool searchString4)
         {
             UserId = HttpContext.Session.GetString("userId") ?? string.Empty;
-            await LoadAsync(sortOrder,searchString1, searchString2, searchString3, searchString4);
+            await LoadAsync(sortOrder ,searchString1, searchString2, searchString3, searchString4);
             return Page();
         }
+        // public async Task OnGetIdAsync ()
+        // {
+        //     var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r=>r.ReservationId == Input2.ReservationId);
+        //     Id = reservation.ReservationId;
+        // }
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
             if (AppDb.Reservations == null)
@@ -175,11 +180,7 @@ namespace WebApp.Pages;
          await LogAsync(reservation.ReservationId, "CONFIRMED");
          return RedirectToPage();
         }
-        private async Task OnPostLoadIdAsync(int id)
-        {
-            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r=>r.ReservationId == id);
-            Id = reservation.ReservationId;
-        }
+
         public async Task<IActionResult> OnPostEditAsync(int id)
         {
             var reservation = await AppDb.Reservations.FirstOrDefaultAsync(reservation => reservation.ReservationId == id);

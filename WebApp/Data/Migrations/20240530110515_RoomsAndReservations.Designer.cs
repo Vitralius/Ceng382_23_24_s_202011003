@@ -12,7 +12,7 @@ using WebApp.Models;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(RoomsAndReservationsDatabaseContext))]
-    [Migration("20240529210700_RoomsAndReservations")]
+    [Migration("20240530110515_RoomsAndReservations")]
     partial class RoomsAndReservations
     {
         /// <inheritdoc />
