@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.IdentityModel.Tokens;
 #nullable disable
 
 namespace WebApp.Pages;
@@ -65,7 +66,7 @@ namespace WebApp.Pages;
             var today = DateTime.Today;
             var lastday = today.AddDays(7-(int)today.DayOfWeek);
             var id = HttpContext.Session.GetString("userId") ?? string.Empty;
-            ReservationList = await AppDb.Reservations.Where(reservation => reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear < lastday.DayOfYear && reservation.IsDeleted == false && reservation.ReserverId == id).ToListAsync();
+            ReservationList = await AppDb.Reservations.Where(reservation => reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear <= lastday.DayOfYear && reservation.IsDeleted == false && reservation.ReserverId == id).ToListAsync();
             RoomList = await AppDb.Rooms.Where(room => room.Capacity > 0 && room.IsDeleted == false && room.IsReservable == true).ToListAsync();
             RoomNameFilter = searchString1;
             RoomCapacityFilter = Convert.ToInt32(searchString2);
@@ -122,6 +123,11 @@ namespace WebApp.Pages;
                     sortingList = sortingList.OrderBy(s => s.Room.RoomName);
                     break;
             }
+            // if(sortingList.IsNullOrEmpty())
+            // throw new ArgumentException("SortingList is null");
+            // if(ReservationList.IsNullOrEmpty())
+            // throw new ArgumentException("ReservationList is null");
+            if(!sortingList.IsNullOrEmpty() && !ReservationList.IsNullOrEmpty())
             ReservationList = sortingList.ToList();
         }
         public async Task<IActionResult> OnGetAsync(string sortOrder, string searchString1, string searchString2, string searchString3, bool searchString4)
@@ -130,11 +136,20 @@ namespace WebApp.Pages;
             await LoadAsync(sortOrder ,searchString1, searchString2, searchString3, searchString4);
             return Page();
         }
-        // public async Task OnGetIdAsync ()
-        // {
-        //     var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r=>r.ReservationId == Input2.ReservationId);
-        //     Id = reservation.ReservationId;
-        // }
+        public async Task OnGetIdAsync (int id)
+        {
+            int a;
+            Int32.TryParse(Request.Query["ReservaitonID"], out a);
+            var reservation = await AppDb.Reservations.FirstOrDefaultAsync(r=>r.ReservationId == id);
+            if(reservation==null)
+            {
+                Id = id;
+            }
+            else
+            {
+                Id = reservation.ReservationId;
+            }
+        }
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
             if (AppDb.Reservations == null)

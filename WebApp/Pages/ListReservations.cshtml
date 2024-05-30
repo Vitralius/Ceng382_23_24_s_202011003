@@ -28,7 +28,7 @@
 <h1>@ViewData["Title"]</h1>
 <p>Use this page to list Reservation.</p>
 
-<form asp-page="./ListReservations" method="get">
+<form asp-page="./ListReservations" method="get" >
     <div class="form-actions no-color">
         <p>
             Find by Room Name:
@@ -146,17 +146,17 @@
     }
     </tbody>
 </table>
-    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Id</h5>
+                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Input2.ReservationId  @Model.Id</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
             <div class="modal-body">
-            <form id="editReservationForm" method="post" asp-page-handler="Id">
+            <form id="editReservationForm" method="get" asp-page-handler="Id" asp-route-itemid="@Model.Input2.ReservationId">
                 <label asp-for="Input2.ReservationId" class="control-label" value="Reservation"></label>
                 <select asp-for="Input2.ReservationId" id="PizzaSize" aria-placeholder="Select Reservation">
                 @foreach (var reservation in Model.ReservationList)
@@ -177,18 +177,18 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Id</h5>
+                <h5 class="modal-title" id="myModalLabel">Edit Reservation @Model.Input2.ReservationId  @Model.Id)</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            <div class="modal-body">
-                @if(@Model.Id > 0 )
+            <div class="modal-body"> 
+                @if(@Model.Input2.ReservationId > 0 || @Model.Id > 0)
                 {
-                    <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="Input2.RoomId">
+                    <form id="editReservationForm" method="post" asp-area="./ListReservations" asp-page-handler="Edit" asp-route-id="Input2.ReservationId">
                     <div class="form-group">
                         <label asp-for="Input.RoomId" class="col-form-label"></label>
-                        <select asp-for="Input.RoomId" class="form-control" id="PizzaSize" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Id).Room.RoomName" >
+                        <select asp-for="Input.RoomId" class="form-control" id="PizzaSize" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Input2.ReservationId).Room.RoomName" >
                             <option value="">-- Select Room --</option>
                         @foreach (var room in Model.RoomList)
                         {
@@ -199,7 +199,7 @@
                     </div>
                     <div class="form-group">
                      <label asp-for="Input.Date" class="col-form-label"></label>
-                     <input asp-for="Input.Date" class="form-control" placeholder="@todayString" type="date" min="@todayString" max="@lastdayString" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Id).Date"/>
+                     <input asp-for="Input.Date" class="form-control" placeholder="@todayString" type="date" min="@todayString" max="@lastdayString" aria-placeholder="@Model.ReservationList.First(r=>r.ReservationId==@Model.Input2.ReservationId).Date"/>
                    </div>
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-primary" />
@@ -214,7 +214,7 @@
               <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                @* <button type="submit" class="btn btn-primary form-group" id="editReservationForm">Save changes</button> *@
+                 <button type="submit" class="btn btn-primary form-group" id="editReservationForm">Save changes</button> 
               </div>
             </div>
         </div>

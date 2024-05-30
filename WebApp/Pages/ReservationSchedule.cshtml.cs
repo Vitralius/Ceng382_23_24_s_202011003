@@ -31,7 +31,7 @@ namespace WebApp.Pages;
             {
                 Dates.Add(DateOnly.FromDateTime(today).AddDays(i));
             };
-            ReservationList = await AppDb.Reservations.Where(reservation => reservation.IsDeleted == false && reservation.ReserverId == id && reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear < Dates[6].DayOfYear).ToListAsync();
+            ReservationList = await AppDb.Reservations.Where(reservation => reservation.IsDeleted == false && reservation.ReserverId == id && reservation.Date.DayOfYear >= today.DayOfYear && reservation.Date.DayOfYear <= Dates[6].DayOfYear).ToListAsync();
             RoomList = await AppDb.Rooms.ToListAsync();
         }
         public async Task<IActionResult> OnGetAsync()

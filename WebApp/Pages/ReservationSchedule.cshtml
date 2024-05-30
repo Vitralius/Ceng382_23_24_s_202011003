@@ -6,13 +6,13 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<p>Use this page to Scedule Reservation.</p>
-
+<p>Use this page to Schedule Reservation.</p>
+<link rel="stylesheet" type="text/css" href="~/css/DPS.css">
 <body>
     
     <table class="schedule-table">
         <thead>
-            <tr>
+            <tr class="table100-head">
                 <th class="titelCell" align="center">Room/Date</th>
                 @foreach (var date in Model.Dates)
                 {
@@ -27,6 +27,7 @@
                     <td class="ticCell">@room.RoomName</td>
                     @foreach (var date in Model.Dates)
                     {
+                        int i=0;
                         <td class="ticCell">
                         @foreach(var reservation in Model.ReservationList)
                         {
@@ -35,13 +36,14 @@
                             {
                                 
                                 <div style="color: Red;">RESERVED</div>
+                                i = 1;
                                 break;
                             }
-                            else if (reservation != null && reservation.Room == room)
+                        }
+                        @if(i==0)
                             {
                                 <div>Available</div>
                             }
-                        }
                         </td>
                     }
                 </tr>
